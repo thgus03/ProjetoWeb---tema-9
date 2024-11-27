@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
-# Create your views here.
+from .models import Produto
 
 def home(request):
-    return render(request, 'home.html', {})
+    produtos = Produto.objects.all()
+    return render(request, 'home.html', {'produtos':produtos})
