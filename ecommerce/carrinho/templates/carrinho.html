@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content%}
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Seu carrinho</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">ver seu carrinho...</p>
+                </div>
+            </div>
+        </header>
+        <br/>
+        <div class="container">
+            {% for produto in carrinho_produtos %}
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ produto.imagem.url }}" class="img-fluid rounded-start" alt="Imagem">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                    <center>
+                      <h5 class="card-title">{{ produto.nome }}</h5>
+                      <p class="card-text">{{ produto.descricao}}</p>
+                      {% if produto.promocao %}
+                      <strike>{{produto.preco}} R$</strike>
+                      &nbsp;
+                      {{produto.preco_promocao}} R$
+                      {% else %}
+                      {{produto.preco}} R$
+                      {% endif %}
+                      <br/>
+                    <center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+{% endblock %}

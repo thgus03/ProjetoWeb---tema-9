@@ -7,6 +7,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django import forms
 
+def produto(request, id):
+    produto = Produto.objects.get(id=id)
+    return render(request, 'produto.html', {'produto':produto})
+
 def home(request):
     produtos = Produto.objects.all()
     return render(request, 'home.html', {'produtos':produtos})

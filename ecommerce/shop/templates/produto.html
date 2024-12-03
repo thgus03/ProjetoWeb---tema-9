@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ produto.imagem.url }}" class="img-fluid rounded-start" alt="Imagem">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+            <center>
+              <h5 class="card-title">{{ produto.nome }}</h5>
+              <p class="card-text">{{ produto.descricao}}</p>
+              {% if produto.promocao %}
+              <strike>{{produto.preco}} R$</strike>
+              &nbsp;
+              {{produto.preco_promocao}} R$
+              {% else %}
+              {{produto.preco}} R$
+              {% endif %}
+              <br/>
+              <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="adicionar_carrinho">Adicionar ao carrinho</button>
+            <center>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<br></br><br></br>
+<br></br><br></br>
+<br></br><br></br>
+<br></br>
+
+<script>
+$(document).on('click', '#adicionar_carrinho', function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '{% url 'carrinho_adicionar' %}',
+    data: {
+      product_id: $('#adicionar_carrinho').val(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+
+    success: function(json){
+      //console.log(json)
+      document.getElementById("quantidade_carrinho").
+      textContent = json.quantidade
+    }, 
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+  });
+})
+
+</script>
+
+{% endblock %}
