@@ -9,6 +9,7 @@
   <img src="imagem2.png" alt="imagem" width="500">
   <p><em>Template utilizado</em></p>
 </div>
+<br/><br/>
 <div align="left">
   <img src="imagem.png" alt="imagem" width="500">
   <p><em>Imagem do projeto avaliação final</em></p>
