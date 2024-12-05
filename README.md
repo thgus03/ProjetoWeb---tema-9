@@ -3,9 +3,9 @@
 ### Avaliação final - Programação para Web
 ### Aluno: Gustavo de Souza Andrade
 
-<div align="center">
-  <img src="imagem.png" alt="imagem" width="300">
-  <p><em>imagem</em></p>
+<div align="left">
+  <img src="imagem.png" alt="imagem" width="500">
+  <p><em>Imagem do projeto avaliação final</em></p>
 </div>
 
 ## Funcionalidades
