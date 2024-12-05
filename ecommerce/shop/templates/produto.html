@@ -19,7 +19,25 @@
               {% else %}
               {{produto.preco}} R$
               {% endif %}
-              <br/>
+              <br></br>
+              <div class="row justify-content-center">
+                <div class="col-md-2">Quantidade:</div>
+                <div class="col-md-2">
+                <select class="form-select form-select-sm" id="quantidade-carrinho">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                </div>
+              </div>
+              {% if reviews %}
+                <span class="badge bg-warning text-dark" >{{ media_avaliacao }} / 5.0</span>
+              {% endif %}
+              <br/><br/><br/>
+              <br/><br/><br/>
+              <br/><br/>
               <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="adicionar_carrinho">Adicionar ao carrinho</button>
             <center>
             </div>
@@ -27,6 +45,38 @@
         </div>
       </div>
 </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+          <h3 class="mt-5 mb-4" style="text-align: left;">Avaliações</h3>
+      </div>
+  </div>
+  {% if reviews %}
+      <div class="row justify-content-left">
+          {% for review in reviews %}
+              <div class="col-12 col-md-6 col-lg-4">
+                  <div class="card h-100 text-left">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ review.cliente.user.username }}</h5>
+                          <p class="card-text">
+                              <strong>Avaliação:</strong>
+                              <span class="badge bg-warning text-dark">{{ review.avaliacao }} / 5</span>
+                          </p>
+                          <p class="card-text"><em>"{{ review.comentario }}"</em></p>
+                      </div>
+                      <div class="card-footer">
+                          <small class="text-muted">Avaliado em {{ review.data|date:"d/m/Y" }}</small>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  {% else %}
+      <p class="text-muted text-center">Este produto ainda não tem avaliações.</p>
+  {% endif %}
+</div>
+
 <br></br><br></br>
 <br></br><br></br>
 <br></br><br></br>
@@ -40,6 +90,7 @@ $(document).on('click', '#adicionar_carrinho', function(e){
     url: '{% url 'carrinho_adicionar' %}',
     data: {
       product_id: $('#adicionar_carrinho').val(),
+      product_qty: $('#quantidade-carrinho option:selected').text(),
       csrfmiddlewaretoken: '{{ csrf_token }}',
       action: 'post'
     },
@@ -59,4 +110,4 @@ $(document).on('click', '#adicionar_carrinho', function(e){
 
 </script>
 
-{% endblock %}
+{% endblock %} 

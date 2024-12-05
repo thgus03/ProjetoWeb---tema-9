@@ -31,11 +31,97 @@
                       {{produto.preco}} R$
                       {% endif %}
                       <br/>
+                      <div class="row justify-content-center">
+                        <div class="col-md-2">Quantidade:</div>
+                        <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="select{{ produto.id }}">
+                            {% for key, value in quantidade.items %}
+                              {% if key == produto.id|slugify %}
+                              <option selected>{{ value }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                        </div>
+                      </div>
+                      <br/><br/>
+                      <button type="button" data-index="{{ produto.id }}" class="btn btn-primary update-cart">Atualizar</button>
+                      <button type="button" data-index="{{ produto.id }}" class="btn btn-danger delete-cart">Remover</button>
                     <center>
                     </div>
                   </div>
                 </div>
               </div>
             {% endfor %}
+            <h3>Total: {{ total_carrinho }} R$</h3>
+            <br/><br/><br/>
+            <form method="POST" action="{% url 'finalizar_compra'%}">
+              {% csrf_token %}
+            <button type="submit" class="btn btn-success">Finalizar Compra</button>
+            </form>
         </div>
+        <br></br><br></br>
+        <br></br><br></br>
+        <br></br><br></br>
+        <br></br>
+<script>
+  $(document).on('click', '.update-cart', function(e){
+    e.preventDefault();
+    var produtoid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url 'carrinho_atualizar' %}',
+      data: {
+        product_id: $(this).data('index'),
+        product_qty: $('#select' + produtoid + ' option:selected').text(),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+  
+      success: function(json){
+        //console.log(json)
+        //document.getElementById("quantidade_carrinho").
+        //textContent = json.quantidade
+        location.reload();
+      }, 
+  
+      error: function(xhr, errmsg, err){
+  
+      }
+  
+    });
+  })
+
+  $(document).on('click', '.delete-cart', function(e){
+    e.preventDefault();
+    var produtoid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url 'carrinho_deletar' %}',
+      data: {
+        product_id: $(this).data('index'),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+  
+      success: function(json){
+        //console.log(json)
+        //document.getElementById("quantidade_carrinho").
+        //textContent = json.quantidade
+        location.reload();
+      }, 
+  
+      error: function(xhr, errmsg, err){
+  
+      }
+  
+    });
+  })
+</script>
+
+
 {% endblock %}

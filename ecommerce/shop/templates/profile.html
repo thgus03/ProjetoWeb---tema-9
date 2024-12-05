@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Bem vindo, {{ request.user.cliente.primeiro_nome }}</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Produtos Comprados</p>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <br/>
+    <div class="rol">
+    <div class="row row-cols-5 row-cols-md-6 g-4">
+        {% for pedido in pedidos %}
+        <div class="col">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{ pedido.produto.imagem.url }}" alt="{{ pedido.produto.nome }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pedido.produto.nome }}</h5>
+                    <p class="card-text">{{ pedido.quantidade }} Unidade(s)</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'adicionar_review' pedido.produto.id %}" class="btn btn-primary">
+                        Avaliar Produto
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <br/><br/><br/>
+    <br/><br/><br/>
+    <br/><br/><br/>
+    <br/><br/><br/>
+    <br/>
+    </div>
+</div>
+{% endblock %}

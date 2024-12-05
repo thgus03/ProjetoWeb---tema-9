@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 #Categoria dos produtos
@@ -10,6 +11,7 @@ class Categoria(models.Model):
 
 #Clientes
 class Cliente(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
     primeiro_nome = models.CharField(max_length=50)
     ultimo_nome = models.CharField(max_length=50)
     telefone = models.CharField(max_length=20)
@@ -44,4 +46,17 @@ class Pedido(models.Model):
     status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.produto
+        return f'{self.cliente} - {self.produto} - {self.quantidade}'
+        
+class Review(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    avaliacao = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    comentario = models.TextField(default='',blank=True)
+    data = models.DateField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('produto', 'cliente')
+
+    def __str__(self):
+        return f"{self.cliente} - {self.produto} - {self.avaliacao}"
