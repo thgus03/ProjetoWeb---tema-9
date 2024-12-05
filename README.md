@@ -1,10 +1,10 @@
 # Projeto Web Django - Tema 9
 
-Avaliação final - Programação para Web
-Aluno: Gustavo de Souza Andrade
+## Avaliação final - Programação para Web
+## Aluno: Gustavo de Souza Andrade
 
 <img src="imagem.png" alt="imagem">
-> Imagem do site criado em Djnago para avaliação final
+> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
 ### Funcionalidades
 - Criação de User
