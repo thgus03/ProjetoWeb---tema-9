@@ -4,7 +4,7 @@
 ### Aluno: Gustavo de Souza Andrade
 
 <img src="imagem.png" alt="imagem">
-> Imagem do projeto avaliação final
+* Imagem do projeto avaliação final *
 
 ## Funcionalidades
 - Criação de User
