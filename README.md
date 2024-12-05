@@ -6,7 +6,7 @@
 ## Boostrap template
 [Aqui](https://startbootstrap.com/template/shop-homepage)
 <div align="left">
-  <img src="imagem.png" alt="imagem" width="500">
+  <img src="imagem2.png" alt="imagem" width="500">
   <p><em>Template utilizado</em></p>
 </div>
 <div align="left">
