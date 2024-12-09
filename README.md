@@ -1,7 +1,6 @@
 # Projeto Web Django - Tema 9
 
 ### Avaliação final - Programação para Web
-### Aluno: Gustavo de Souza Andrade
 
 ## Boostrap template
 [Aqui](https://startbootstrap.com/template/shop-homepage)
